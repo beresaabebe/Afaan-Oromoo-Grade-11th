@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">?attr/actionBarSize</item>
+        <item name="android:itemBackground">@drawable/nav_header_bg</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="MyToolBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="popupMenuStyle">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:background">@drawable/ao11</item>
+    </style>
+
+    <style name="MyAlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+    <style name="MyRatingBar" parent="Widget.AppCompat.RatingBar">
+<!--        Non selected star -->
+        <item name="colorControlNormal">#4D000000</item>
+<!--        selected star-->
+        <item name="colorControlActivated">@color/dialog_color_1</item>
+    </style>
+
+</resources>
