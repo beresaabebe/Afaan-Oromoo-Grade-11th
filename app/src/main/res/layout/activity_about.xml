@@ -13,7 +13,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/nav_header_bg">
+        android:background="@drawable/nav_header_bg"
+        android:theme="@style/MyToolBar">
 
         <ImageButton
             android:id="@+id/ib_back"
@@ -23,7 +24,8 @@
             android:background="@android:color/transparent"
             android:contentDescription="@string/app_name"
             android:padding="10dp"
-            android:src="@drawable/ic_baseline_arrow_back_24" />
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            ads:tint="@color/white" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -36,7 +38,7 @@
             android:fontFamily="serif"
             android:singleLine="true"
             android:text="@string/app_name"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -53,23 +55,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                ads:cardElevation="5dp"
-                ads:cardMaxElevation="10dp"
-                ads:cardCornerRadius="100dp"
-                android:layout_gravity="center_horizontal">
-
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
                 android:src="@drawable/icon" />
-
-            </androidx.cardview.widget.CardView>
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
@@ -91,6 +83,33 @@
                 android:layout_margin="5dp"
                 android:background="#D6D5D5" />
 
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ad_unit_id" />
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/contact"
+                android:textSize="18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                ads:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                ads:spanCount="2"
+                tools:listitem="@layout/about_list_item" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -102,41 +121,29 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="serif"
-                    android:textSize="16sp"
                     android:padding="10dp"
-                    android:paddingEnd="0dp"
                     android:paddingStart="0dp"
-                    android:text="@string/version" />
+                    android:paddingEnd="0dp"
+                    android:text="@string/version"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/version_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:fontFamily="serif"
-                    android:textSize="16sp"
                     android:layout_toEndOf="@+id/v"
+                    android:fontFamily="serif"
                     android:padding="10dp"
                     android:paddingStart="0dp"
                     android:paddingEnd="0dp"
-                    android:text="@string/app_name" />
+                    android:text="@string/app_name"
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
         </LinearLayout>
 
     </ScrollView>
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id" />
 
 </RelativeLayout>
