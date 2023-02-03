@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.BookDetailActivity">
 
     <RelativeLayout
@@ -68,15 +67,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+    <LinearLayout
+        android:id="@+id/banner_container"
+        android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="20dp"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
 
 </RelativeLayout>

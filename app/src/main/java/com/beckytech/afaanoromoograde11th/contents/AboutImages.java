@@ -6,9 +6,11 @@ public class AboutImages {
     public int[] images = {
             R.drawable.fb,
             R.drawable.youtube,
-            R.drawable.website,
+            R.drawable.ic_baseline_language_24,
             R.drawable.fb,
             R.drawable.telegram,
-            R.drawable.ic_baseline_local_phone_24
+            R.drawable.ic_baseline_phone_24,
+            R.drawable.ic_baseline_language_24,
+            R.drawable.youtube
     };
 }

@@ -10,8 +10,8 @@ public class Model implements Serializable {
 
     public Model(String title, String subTitle, int startPage, int endPage) {
         this.title = title;
-        this.endPage = endPage;
         this.startPage = startPage;
+        this.endPage = endPage;
         this.subTitle = subTitle;
     }
 

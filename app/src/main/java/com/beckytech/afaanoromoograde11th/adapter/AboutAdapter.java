@@ -15,8 +15,8 @@ import com.beckytech.afaanoromoograde11th.model.AboutModel;
 import java.util.List;
 
 public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.AboutViewHolder> {
-    private List<AboutModel> modelList;
-    private OnLinkClicked linkClicked;
+    private final List<AboutModel> modelList;
+    private final OnLinkClicked linkClicked;
 
     public AboutAdapter(List<AboutModel> modelList, OnLinkClicked linkClicked) {
         this.modelList = modelList;
@@ -24,7 +24,7 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.AboutViewHol
     }
 
     public interface OnLinkClicked {
-        public void linkClicked(AboutModel model);
+        void linkClicked(AboutModel model);
     }
 
     @NonNull

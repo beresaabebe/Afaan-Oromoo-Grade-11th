@@ -32,7 +32,18 @@ public class MoreAppsName {
             "Afaan oromoo Grade 5th",
             "Art Grade 5th",
             "Amharic Grade 5th",
-            "English Grade 5th"
+            "English Grade 5th",
 
+            "Kuusaa Walaloo",
+            "Learn Afaan oromoo",
+            "Extreme Mathematics Grade 11th",
+            "Extreme Mathematics Grade 12th",
+            "Grade 10th Afaan Oromoo",
+            "Grade 11th Afaan Oromoo",
+            "Grade 12th Afaan Oromoo",
+            "Grade 9th Afaan Oromoo",
+            "Grade 6th Afaan Oromoo",
+            "Biology Grade 9th",
+            "Citizenship Education Grade 10th"
     };
 }

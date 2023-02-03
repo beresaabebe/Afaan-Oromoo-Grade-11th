@@ -32,6 +32,18 @@ public class MoreAppUrl {
             "https://play.google.com/store/apps/details?id=com.beckytech.afaanoromookutaa5ffaa",
             "https://play.google.com/store/apps/details?id=com.beckytech.og_artiiwwankutaa5ffaa",
             "https://play.google.com/store/apps/details?id=com.beckytech.grade5thamharic",
-            "https://play.google.com/store/apps/details?id=com.beckytech.englishgrade5th"
+            "https://play.google.com/store/apps/details?id=com.beckytech.englishgrade5th",
+
+            "https://play.google.com/store/apps/details?id=com.beckytech.kuusaawalaloo",
+            "https://play.google.com/store/apps/details?id=com.beckytech.learnafaanoromoo",
+            "https://play.google.com/store/apps/details?id=com.beckytech.extrememathematicsgrade11th",
+            "https://play.google.com/store/apps/details?id=com.beckytech.extrememathematicsgrade12",
+            "https://play.google.com/store/apps/details?id=com.beckytech.afaanoromookutaa10ffaa",
+            "https://play.google.com/store/apps/details?id=com.beckytech.afaanoromoograde11th",
+            "https://play.google.com/store/apps/details?id=com.beckytech.afaanoromookutaa12ffaa",
+            "https://play.google.com/store/apps/details?id=com.beckytech.afaanoromookutaa9ffaa",
+            "https://play.google.com/store/apps/details?id=com.beckytech.afaanoromookutaa6ffaaafaan2ffaa",
+            "https://play.google.com/store/apps/details?id=com.beckytech.biologygrade9studenttextbook",
+            "https://play.google.com/store/apps/details?id=com.beckytech.citizenshipeducationgrade10"
     };
 }
