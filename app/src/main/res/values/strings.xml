@@ -19,4 +19,6 @@
     <string name="download_now">Download Now</string>
     <string name="download_more_apps">Download more apps</string>
     <string name="contact">Contact</string>
+    <string name="privacy_title">Privacy</string>
+    <string name="go_back_to_main">go back to main</string>
 </resources>

@@ -5,7 +5,11 @@
         android:id="@+id/action_more_apps"
         android:icon="@drawable/ic_baseline_read_more_24"
         android:title="@string/more_apps" />
-
+    <item
+        android:id="@+id/rate_now"
+        android:title="@string/rate_now"
+        android:icon="@drawable/ic_baseline_star_rate_24"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_about_us"
         android:icon="@drawable/ic_baseline_person_24"
@@ -13,12 +17,9 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/rate_now"
-        android:title="@string/rate_now"
-        
-        android:icon="@drawable/ic_baseline_star_rate_24"
-        app:showAsAction="ifRoom" />
-
+        android:id="@+id/action_privacy"
+        android:icon="@drawable/baseline_privacy_tip_24"
+        android:title="@string/privacy_title"/>
     <item
         android:id="@+id/action_update"
         android:icon="@drawable/ic_baseline_update_24"

@@ -10,9 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class AppRate {
-    private final static String APP_TITLE = String.valueOf(R.string.app_name);// App Name
-    private static final String APP_PNAME = " com.beckytech.englishgrade5th";// Package Name
-
+    private final static String APP_TITLE = "Afaan Oromoo Kutaa 11ffaa";// App Name
+    private static final String APP_PNAME = " com.beckytech.afaanoromoograde11th";// Package Name
     private final static int DAYS_UNTIL_PROMPT = 3;//Min number of days
     private final static int LAUNCHES_UNTIL_PROMPT = 3;//Min number of launches
 

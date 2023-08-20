@@ -3,6 +3,7 @@ package com.beckytech.afaanoromoograde11th;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,24 +11,29 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beckytech.afaanoromoograde11th.activity.AboutActivity;
 import com.beckytech.afaanoromoograde11th.activity.BookDetailActivity;
+import com.beckytech.afaanoromoograde11th.activity.PrivacyActivity;
 import com.beckytech.afaanoromoograde11th.adapter.Adapter;
 import com.beckytech.afaanoromoograde11th.adapter.MoreAppsAdapter;
 import com.beckytech.afaanoromoograde11th.contents.ContentEndPage;
 import com.beckytech.afaanoromoograde11th.contents.ContentStartPage;
-import com.beckytech.afaanoromoograde11th.contents.MoreAppImages;
+import com.beckytech.afaanoromoograde11th.contents.MoreAppTitle;
 import com.beckytech.afaanoromoograde11th.contents.MoreAppUrl;
-import com.beckytech.afaanoromoograde11th.contents.MoreAppsName;
+import com.beckytech.afaanoromoograde11th.contents.MoreAppsBgColor;
+import com.beckytech.afaanoromoograde11th.contents.MoreAppsImage;
 import com.beckytech.afaanoromoograde11th.contents.SubTitleContents;
 import com.beckytech.afaanoromoograde11th.contents.TitleContents;
 import com.beckytech.afaanoromoograde11th.model.Model;
@@ -49,13 +55,9 @@ import com.google.android.play.core.tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Adapter.onBookClicked, MoreAppsAdapter.MoreAppsClicked {
+public class MainActivity extends AppCompatActivity implements Adapter.onBookClicked, MoreAppsAdapter.OnAppClicked {
     InterstitialAd interstitialAd;
     String TAG = MainActivity.class.getSimpleName();
-    private final MoreAppImages images = new MoreAppImages();
-    private final MoreAppUrl url = new MoreAppUrl();
-    private final MoreAppsName appsName = new MoreAppsName();
-    private List<MoreAppsModel> moreAppsModelList;
     private List<Model> modelList;
     private final TitleContents titleContents = new TitleContents();
     private final SubTitleContents subTitleContent = new SubTitleContents();
@@ -64,42 +66,24 @@ public class MainActivity extends AppCompatActivity implements Adapter.onBookCli
     private ReviewInfo reviewInfo;
     private ReviewManager manager;
     private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
+
+    private List<MoreAppsModel> moreAppsModelList;
+    private final MoreAppsBgColor moreAppsBgColor = new MoreAppsBgColor();
+    private final MoreAppsImage moreAppsImage = new MoreAppsImage();
+    private final MoreAppTitle moreAppTitle = new MoreAppTitle();
+    private final MoreAppUrl moreAppUrl = new MoreAppUrl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_drawer);
 
-        AudienceNetworkAds.initialize(this);
-        callAds();
-
+        facebookAds();
         activateReviewInfo();
-
         AppRate.app_launched(this);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
-        drawerToggle.syncState();
-        drawerLayout.addDrawerListener(drawerToggle);
-
-        navigationView = findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(item -> {
-            MenuOptions(item);
-            return true;
-        });
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView_main_item);
-        getData();
-        Adapter adapter = new Adapter(modelList, this);
-        recyclerView.setAdapter(adapter);
-
-        RecyclerView moreAppsRecyclerView = findViewById(R.id.moreAppsRecycler);
-        getMoreApps();
-        MoreAppsAdapter moreAppsAdapter = new MoreAppsAdapter(moreAppsModelList, this);
-        moreAppsRecyclerView.setAdapter(moreAppsAdapter);
+        navDrawer();
+        recyclerView();
 
         if (reviewInfo != null) {
             Task<Void> flow = manager.launchReviewFlow(this, reviewInfo);
@@ -110,11 +94,53 @@ public class MainActivity extends AppCompatActivity implements Adapter.onBookCli
         }
     }
 
-    private void getMoreApps() {
+    private void recyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_main_item);
+        getData();
+        Adapter adapter = new Adapter(modelList, this);
+        recyclerView.setAdapter(adapter);
+
+        RecyclerView more_app_recycler = findViewById(R.id.more_app_recycler);
+        getMoreApp();
+        MoreAppsAdapter moreAppsAdapter = new MoreAppsAdapter(moreAppsModelList, this, this);
+        more_app_recycler.setAdapter(moreAppsAdapter);
+    }
+
+    private void getMoreApp() {
         moreAppsModelList = new ArrayList<>();
-        for (int i = 0; i < appsName.appNames.length; i++) {
-            moreAppsModelList.add(new MoreAppsModel(appsName.appNames[i], url.url[i], images.images[i]));
+        for (int i = 0; i < moreAppTitle.title.length; i++) {
+            moreAppsModelList.add(new MoreAppsModel(moreAppTitle.title[i],
+                    moreAppUrl.url[i],
+                    moreAppsImage.images[i],
+                    moreAppsBgColor.color[i]));
         }
+    }
+
+    private void navDrawer() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(Color.YELLOW);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
+        drawerToggle.syncState();
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.getDrawerArrowDrawable().setColor(Color.YELLOW);
+
+        navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            MenuOptions(item);
+            return true;
+        });
+
+        View view = navigationView.getHeaderView(0);
+        ImageView back_btn = view.findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.START));
+    }
+
+    private void facebookAds() {
+        AudienceNetworkAds.initialize(this);
+        callAds();
     }
 
     private void getData() {
@@ -127,16 +153,11 @@ public class MainActivity extends AppCompatActivity implements Adapter.onBookCli
         }
     }
 
-    @Override
-    public void appClicked(MoreAppsModel model) {
-        showAdWithDelay();
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(model.getUrl()));
-        startActivity(intent);
-    }
-
     @SuppressLint("UseCompatLoadingForDrawables")
     void MenuOptions(MenuItem item) {
+        drawerLayout.closeDrawer(GravityCompat.START);
+        if (item.getItemId() == R.id.action_privacy)
+            startActivity(new Intent(this, PrivacyActivity.class));
         if (item.getItemId() == R.id.action_about_us) {
             showAdWithDelay();
             startActivity(new Intent(this, AboutActivity.class));
@@ -166,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.onBookCli
         if (item.getItemId() == R.id.action_update) {
             showAdWithDelay();
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-            int lastVersion = pref.getInt("lastVersion", 0);
+            int lastVersion = pref.getInt("lastVersion", 5);
             String url = "https://play.google.com/store/apps/details?id=" + getPackageName();
             if (lastVersion < BuildConfig.VERSION_CODE) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
@@ -278,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.onBookCli
             if (task.isSuccessful()) {
                 reviewInfo = task.getResult();
             } else {
-                Toast.makeText(this, "Review fail to start!", Toast.LENGTH_SHORT).show();
+                Log.d(MainActivity.class.getSimpleName(),"Review fail to start!");
             }
         });
     }
@@ -292,5 +313,15 @@ public class MainActivity extends AppCompatActivity implements Adapter.onBookCli
                 Toast.makeText(this, "Rating is complete!", Toast.LENGTH_SHORT).show();
             });
         }
+    }
+
+    @Override
+    public void clickedApp(MoreAppsModel model) {
+        String url = "https://play.google.com/store/apps/details?id=";
+        Intent intent = getPackageManager().getLaunchIntentForPackage(model.getUrl());
+        if (intent == null) {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url + model.getUrl()));
+        }
+        startActivity(intent);
     }
 }
