@@ -2,7 +2,6 @@ package com.beckytech.afaanoromoograde11th.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,9 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookDetailActivity extends AppCompatActivity {
-    InterstitialAd interstitialAd;
-    private final String TAG =  BookDetailActivity.class.getSimpleName();
-    AdView adView;
+    private InterstitialAd interstitialAd;
+    private final String TAG = BookDetailActivity.class.getSimpleName();
+    private AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +35,14 @@ public class BookDetailActivity extends AppCompatActivity {
 
         callAds();
 
-        findViewById(R.id.back_book_detail).setOnClickListener(v -> onBackPressed());
+        findViewById(R.id.back_book_detail).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         Intent intent = getIntent();
         Model model = (Model) intent.getSerializableExtra("data");
 
         TextView title = findViewById(R.id.title_book_detail);
         title.setSelected(true);
+        assert model != null;
         title.setText(model.getTitle());
 
         TextView subTitle = findViewById(R.id.sub_title_book_detail);
@@ -75,6 +76,7 @@ public class BookDetailActivity extends AppCompatActivity {
                 .scrollHandle(new DefaultScrollHandle(this))
                 .load();
     }
+
     private void callAds() {
         AudienceNetworkAds.initialize(this);
 //        513372960928869_513374324262066
@@ -131,28 +133,6 @@ public class BookDetailActivity extends AppCompatActivity {
                 interstitialAd.buildLoadAdConfig()
                         .withAdListener(interstitialAdListener)
                         .build());
-    }
-
-    private void showAdWithDelay() {
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            // Check if interstitialAd has been loaded successfully
-            if(interstitialAd == null || !interstitialAd.isAdLoaded()) {
-                return;
-            }
-            // Check if ad is already expired or invalidated, and do not show ad if that is the case. You will not get paid to show an invalidated ad.
-            if(interstitialAd.isAdInvalidated()) {
-                return;
-            }
-            // Show the ad
-            interstitialAd.show();
-        }, 1000 * 60 * 2); // Show the ad after 15 minutes
-    }
-
-    @Override
-    public void onBackPressed() {
-        showAdWithDelay();
-        super.onBackPressed();
     }
 
     @Override

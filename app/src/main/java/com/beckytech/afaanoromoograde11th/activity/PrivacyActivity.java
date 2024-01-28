@@ -23,7 +23,7 @@ public class PrivacyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_privacy);
 
         ImageButton ib_back = findViewById(R.id.ib_back);
-        ib_back.setOnClickListener(view -> onBackPressed());
+        ib_back.setOnClickListener(view -> getOnBackPressedDispatcher().onBackPressed());
         ProgressBar progressBar = findViewById(R.id.progress_horizontal);
         progressBar.setVisibility(View.GONE);
 

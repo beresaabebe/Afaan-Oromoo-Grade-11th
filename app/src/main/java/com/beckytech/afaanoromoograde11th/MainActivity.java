@@ -1,13 +1,13 @@
 package com.beckytech.afaanoromoograde11th;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -146,8 +146,10 @@ public class MainActivity extends AppCompatActivity implements Adapter.onBookCli
     private void getData() {
         modelList = new ArrayList<>();
         for (int i = 0; i < titleContents.title.length; i++) {
-            modelList.add(new Model(titleContents.title[i].substring(0, 1).toUpperCase() + "" + titleContents.title[i].substring(1).toLowerCase(),
-                    subTitleContent.subTitle[i].substring(0, 1).toUpperCase() + "" + subTitleContent.subTitle[i].substring(1),
+            modelList.add(new Model(titleContents.title[i].substring(0, 1).toUpperCase() +
+                    titleContents.title[i].substring(1).toLowerCase(),
+                    subTitleContent.subTitle[i].substring(0, 1).toUpperCase() +
+                            subTitleContent.subTitle[i].substring(1),
                     startPage.pageStart[i],
                     endPage.pageEnd[i]));
         }
@@ -186,8 +188,8 @@ public class MainActivity extends AppCompatActivity implements Adapter.onBookCli
 
         if (item.getItemId() == R.id.action_update) {
             showAdWithDelay();
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-            int lastVersion = pref.getInt("lastVersion", 5);
+            SharedPreferences pref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+            int lastVersion = pref.getInt("lastVersion", BuildConfig.VERSION_CODE);
             String url = "https://play.google.com/store/apps/details?id=" + getPackageName();
             if (lastVersion < BuildConfig.VERSION_CODE) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
